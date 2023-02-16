@@ -1,8 +1,10 @@
 const express = require("express");
 const dotenv = require("dotenv");
+const cookieParser = require("cookie-parser");
 const connectDb = require("./config/db");
 
 const hospitals = require("./routes/hospitals");
+const auth = require("./routes/auth");
 
 dotenv.config({ path: "./config/config.env" });
 
@@ -14,7 +16,9 @@ const version = "v1/";
 const baseUrl = "/api/" + version;
 
 app.use(express.json());
+app.use(cookieParser());
 app.use(`${baseUrl}hospitals`, hospitals);
+app.use(`${baseUrl}auth`, auth);
 
 const PORT = process.env.PORT ?? 5000;
 
