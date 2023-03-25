@@ -1,8 +1,12 @@
 const express = require("express");
 const { getHospitals, createHospital, updateHospital, getHospital, deleteHospital } = require("../controllers/hospitals");
+// Include other resoure routers
+const appointmentRouter = require("./appointments");
 const router = express.Router();
 
 const { protect, authorize } = require("../middleware/auth");
+
+router.use('/:hospitalId/appointments/', appointmentRouter);
 
 // const app = express();
 
