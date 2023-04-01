@@ -41,7 +41,15 @@ exports.login = async (req, res, next) => {
 
   const token = user.getSignedJwtToken();
   const cookieOptions = getCookieOption();
-  return res.status(200).cookie("token", token, cookieOptions).json({ success: true, token });
+  return res.status(200).cookie("token", token, cookieOptions).json({
+    success: true,
+    //add for frontend
+    _id: user._id,
+    name: user.name,
+    email: user.email,
+    //end for frontend,
+    token,
+  });
 };
 
 const getCookieOption = () => {
